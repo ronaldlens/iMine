@@ -11,7 +11,10 @@ import SwiftUI
 struct iMineApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainWindow()
+        }
+        .commands {
+            Menus()
         }
     }
 }
