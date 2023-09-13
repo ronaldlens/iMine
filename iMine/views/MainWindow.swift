@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct MainWindow: View {
+    @Environment(\.centerViewState) private var centerViewState
+    
     var body: some View {
         NavigationView {
             SideBar()
                 .frame(width: 200)
-            CenterView(centerViewState: CenterViewState.shared)
+            CenterView()
         }
         .frame(
             minWidth: 700,
@@ -30,4 +32,5 @@ struct MainWindow: View {
 
 #Preview {
     MainWindow()
+        .environment(\.centerViewState, CenterViewState())
 }

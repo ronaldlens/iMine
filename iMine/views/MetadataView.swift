@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct MetadataView: View {
+    @Environment(\.centerViewState) private var centerViewState
+    @Environment(\.dfData) private var dfData
+    
     @State var columnSelection: ColumnMetadata.ID? = nil
     @State private var isTypeConverting = false
     @State private var isRenaming = false
@@ -15,8 +18,6 @@ struct MetadataView: View {
     @State var columnToChange: ColumnMetadata? = nil
     @State var newColumnName = ""
     @State var columnName = ""
-    
-    let dfData = DfData.shared
     
     var body: some View {
         VStack {
@@ -38,8 +39,8 @@ struct MetadataView: View {
                     TableRow(column)
                         .contextMenu {
                             Button("Convert to Date Type") {
-                                columnToChange = column
-                                isTypeConverting.toggle()
+                                centerViewState.selectedColumn = column.name
+                                centerViewState.whatView = .convertDateColumn
                             }
                             Divider()
                             Button("Rename column") {
@@ -82,12 +83,12 @@ struct MetadataView: View {
     func renameColumn() {
         guard let columnToChange = columnToChange else { return }
         dfData.renameColumn(from: columnToChange.name, to: newColumnName)
-        DfData.shared.updateMetadataFromDf()
+        dfData.updateMetadataFromDf()
     }
     
     func dropColumn() {
         dfData.dropColumn(name: columnName)
-        DfData.shared.updateMetadataFromDf()
+        dfData.updateMetadataFromDf()
     }
    
 

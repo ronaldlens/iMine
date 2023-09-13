@@ -8,15 +8,21 @@
 import SwiftUI
 
 struct DfPreview: View {
-    
-    let dfData = DfData.shared
+    @Environment(\.dfData) private var dfData
     
     var body: some View {
         VStack {
             Text("Loaded data")
                 .font(.title)
                 .multilineTextAlignment(.center)
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+            let table = dfData.dataFrame?.description
+            ScrollView(.horizontal) {
+                Text(table!)
+                    .frame(maxWidth: .infinity)
+                    .font(.system(.caption, design: .monospaced))
+            }
+            .scrollClipDisabled(true)
+            
         }
     }
 }

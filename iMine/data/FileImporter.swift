@@ -8,7 +8,7 @@
 import SwiftUI
 import TabularData
 
-func importFile() {
+func importFile(centerViewState: CenterViewState, dfData: DfData) {
     let openPanel = NSOpenPanel()
     openPanel.allowedContentTypes = [.commaSeparatedText]
     openPanel.allowsMultipleSelection = false
@@ -19,14 +19,12 @@ func importFile() {
         return
     }
     if let url = openPanel.url {
-        print(url)
         let options = CSVReadingOptions()
         do {
-            let df = DfData.shared
-            df.dataFrame = try DataFrame(
+            dfData.dataFrame = try DataFrame(
                 contentsOfCSVFile: url,
                 options: options)
-            CenterViewState.shared.whatView = .metadata
+            centerViewState.whatView = .metadata
         } catch {
             print("Error: \(error)")
             return

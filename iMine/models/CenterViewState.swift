@@ -7,21 +7,31 @@
 
 import Foundation
 import Observation
+import SwiftUI
 
 enum WhatView {
     case nothing,
     dfPreview,
-    metadata
+    metadata,
+    convertDateColumn
     
 }
 
-@Observable class CenterViewState {
+@Observable class CenterViewState: Identifiable {
     static let shared = CenterViewState()
 
+    var id = UUID()
     var whatView: WhatView = .nothing
-
-    private init() {
-        
-    }
-    
+    var selectedColumn = ""
 }
+
+extension EnvironmentValues {
+    var centerViewState: CenterViewState {
+        get { self[CenterViewStateKey.self] }
+        set { self[CenterViewStateKey.self] = newValue }
+    }
+}
+        
+        private struct CenterViewStateKey: EnvironmentKey {
+            static var defaultValue: CenterViewState = CenterViewState()
+        }

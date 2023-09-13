@@ -8,21 +8,24 @@
 import SwiftUI
 
 struct CenterView: View {
-    var centerViewState: CenterViewState
-    
+    @Environment(\.centerViewState) private var centerViewState
+   
    
     var body: some View {
         switch centerViewState.whatView {
         case .nothing:
-            Text(" ")
+            Text("")
         case .dfPreview:
            DfPreview()
         case .metadata:
             MetadataView()
+        case .convertDateColumn:
+            DateConvertView()
         }
+
     }
 }
 
 #Preview {
-    CenterView(centerViewState: CenterViewState.shared)
+    CenterView()
 }

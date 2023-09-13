@@ -5,7 +5,7 @@
 //  Created by Ronald Lens on 02/09/2023.
 //
 
-import Foundation
+import SwiftUI
 import Observation
 import TabularData
 
@@ -26,8 +26,12 @@ struct ColumnMetadata : Identifiable {
     }
 }
 
+struct StringEntry: Identifiable {
+    let id = UUID()
+    let value: String
+}
+
 @Observable class DfData {
-    static let shared = DfData()
     
     var dataFrame: DataFrame? {
         didSet {
@@ -59,5 +63,31 @@ struct ColumnMetadata : Identifiable {
         dataFrame?.removeColumn(name)
     }
     
-   
+    func getListFromColumn(name: String, noLines: Int) -> [StringEntry] {
+        var result: [StringEntry] = []
+        guard let dataFrame = dataFrame else { return result }
+        let columnDf = dataFrame.selecting(columnNames: name)
+        var count = 0
+        for row in columnDf.rows {
+            let str = "\(String(describing: row[name]))"
+            let entry = StringEntry(value: str)
+            result.append(entry)
+            count += 1
+            if (count == noLines) {
+                break
+            }
+        }
+        return result
+    }
+}
+
+extension EnvironmentValues {
+    var dfData: DfData {
+        get { self[DfDataKey.self] }
+        set { self[DfDataKey.self] = newValue }
+    }
+}
+
+private struct DfDataKey: EnvironmentKey {
+    static var defaultValue: DfData = DfData()
 }
