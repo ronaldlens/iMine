@@ -24,6 +24,7 @@ func importFile(centerViewState: CenterViewState, dfData: DfData) {
             dfData.dataFrame = try DataFrame(
                 contentsOfCSVFile: url,
                 options: options)
+            dfData.updateMetadataFromDf()
             centerViewState.whatView = .metadata
         } catch {
             print("Error: \(error)")

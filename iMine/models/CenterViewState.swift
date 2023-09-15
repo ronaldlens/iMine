@@ -12,8 +12,7 @@ import SwiftUI
 enum WhatView {
     case nothing,
     dfPreview,
-    metadata,
-    convertDateColumn
+    metadata
     
 }
 

@@ -19,8 +19,6 @@ struct CenterView: View {
            DfPreview()
         case .metadata:
             MetadataView()
-        case .convertDateColumn:
-            DateConvertView()
         }
 
     }

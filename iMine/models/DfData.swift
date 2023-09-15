@@ -33,11 +33,7 @@ struct StringEntry: Identifiable {
 
 @Observable class DfData {
     
-    var dataFrame: DataFrame? {
-        didSet {
-            updateMetadataFromDf()
-        }
-    }
+    var dataFrame: DataFrame?
     
     var columnMetadata: [ColumnMetadata] = []
     
@@ -47,6 +43,7 @@ struct StringEntry: Identifiable {
     }
     
     func updateMetadataFromDf() {
+        print("updateMetaDataFromDf")
         columnMetadata = []
         if let df = self.dataFrame {
             for col in df.columns {
@@ -69,7 +66,7 @@ struct StringEntry: Identifiable {
         let columnDf = dataFrame.selecting(columnNames: name)
         var count = 0
         for row in columnDf.rows {
-            let str = "\(String(describing: row[name]))"
+            let str = "\(String(describing: row[name]!))"
             let entry = StringEntry(value: str)
             result.append(entry)
             count += 1
@@ -78,6 +75,19 @@ struct StringEntry: Identifiable {
             }
         }
         return result
+    }
+    
+    func convertColumnStringToDate(name: String, format: String) {
+        guard var dataFrame = dataFrame else { return }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        var newColumn: Column<Date> = dataFrame[name, String.self].map { element in
+            let str = element!
+            return dateFormatter.date(from: str)!
+        }
+        dataFrame.replaceColumn(name, with: newColumn)
+        updateMetadataFromDf()
+        print(dataFrame)
     }
 }
 

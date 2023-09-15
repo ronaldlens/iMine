@@ -40,7 +40,7 @@ struct MetadataView: View {
                         .contextMenu {
                             Button("Convert to Date Type") {
                                 centerViewState.selectedColumn = column.name
-                                centerViewState.whatView = .convertDateColumn
+                                isTypeConverting.toggle()
                             }
                             Divider()
                             Button("Rename column") {
@@ -56,6 +56,11 @@ struct MetadataView: View {
                     
                     
                 }
+            }
+            .sheet(isPresented: $isTypeConverting) {
+            } content: {
+                DateConvertSheet()
+                    .frame(width: 640, height: 480)
             }
             .alert("Rename column", isPresented: $isRenaming) {
                 TextField("New column name", text: $newColumnName)
@@ -74,10 +79,6 @@ struct MetadataView: View {
             .dialogIcon(Image(systemName: "delete.left"))
             
         }
-    }
-    
-    func typeConvertColumn() {
-        print("typeconvert")
     }
     
     func renameColumn() {
