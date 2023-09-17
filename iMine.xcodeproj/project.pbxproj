@@ -21,6 +21,7 @@
 		6B80B3682AADEDA2005C2899 /* MetadataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B80B3672AADEDA2005C2899 /* MetadataView.swift */; };
 		6B80B36A2AAF626A005C2899 /* DfPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B80B3692AAF626A005C2899 /* DfPreview.swift */; };
 		6B80B36C2AAFA6E8005C2899 /* DateConvertSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B80B36B2AAFA6E8005C2899 /* DateConvertSheet.swift */; };
+		6BC391372AB7992A00B671D8 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 6BC391362AB7992A00B671D8 /* LICENSE */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,8 @@
 		6B80B3672AADEDA2005C2899 /* MetadataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataView.swift; sourceTree = "<group>"; };
 		6B80B3692AAF626A005C2899 /* DfPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DfPreview.swift; sourceTree = "<group>"; };
 		6B80B36B2AAFA6E8005C2899 /* DateConvertSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateConvertSheet.swift; sourceTree = "<group>"; };
+		6BC391362AB7992A00B671D8 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		6BC391382AB7995500B671D8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +59,8 @@
 		6B01C3DB2AA0F31E00E193F3 = {
 			isa = PBXGroup;
 			children = (
+				6BC391382AB7995500B671D8 /* README.md */,
+				6BC391362AB7992A00B671D8 /* LICENSE */,
 				6B01C3E62AA0F31E00E193F3 /* iMine */,
 				6B01C3E52AA0F31E00E193F3 /* Products */,
 			);
@@ -189,6 +194,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BC391372AB7992A00B671D8 /* LICENSE in Resources */,
 				6B01C3EF2AA0F31F00E193F3 /* Preview Assets.xcassets in Resources */,
 				6B01C3EC2AA0F31F00E193F3 /* Assets.xcassets in Resources */,
 			);

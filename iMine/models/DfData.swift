@@ -99,7 +99,7 @@ struct StringEntry: Identifiable {
     }
     
     func dropRowsWithNilInColumn(name: String) {
-        guard var dataFrame = dataFrame else { return }
+        guard let dataFrame = dataFrame else { return }
         let newDf = dataFrame.filter(on: name, String.self, { $0 != nil })
         self.dataFrame = DataFrame(newDf)
         updateMetadataFromDf()
