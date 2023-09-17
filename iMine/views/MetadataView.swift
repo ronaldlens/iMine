@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct MetadataView: View {
-    @Environment(\.centerViewState) private var centerViewState
-    @Environment(\.dfData) private var dfData
+    @Environment(CenterViewState.self) private var centerViewState
+    @Environment(DfData.self) private var dfData
     
     @State var columnSelection: ColumnMetadata.ID? = nil
+    @State private var isNilDropping = false
     @State private var isTypeConverting = false
     @State private var isRenaming = false
     @State private var isDropping = false
@@ -38,6 +39,10 @@ struct MetadataView: View {
                 ForEach(dfData.columnMetadata) { column in
                     TableRow(column)
                         .contextMenu {
+                            Button("Drop nil rows") {
+                                columnName = column.name
+                                isNilDropping.toggle()
+                            }
                             Button("Convert to Date Type") {
                                 centerViewState.selectedColumn = column.name
                                 isTypeConverting.toggle()
@@ -57,6 +62,13 @@ struct MetadataView: View {
                     
                 }
             }
+            .alert("Drop rows with nil", isPresented: $isNilDropping) {
+                Button("OK", action: dropNilInColumn)
+                Button("Cancel", role: .cancel) {}
+            } message: {
+                Text("Do you really want to drop rows with a nil value in [\(columnName)]")
+            }
+            .dialogIcon(Image(systemName: "xmark.circle"))
             .sheet(isPresented: $isTypeConverting) {
             } content: {
                 DateConvertSheet()
@@ -81,21 +93,25 @@ struct MetadataView: View {
         }
     }
     
+    func dropNilInColumn() {
+        dfData.dropRowsWithNilInColumn(name: columnName)
+    }
+    
     func renameColumn() {
         guard let columnToChange = columnToChange else { return }
         dfData.renameColumn(from: columnToChange.name, to: newColumnName)
-        dfData.updateMetadataFromDf()
     }
     
     func dropColumn() {
         dfData.dropColumn(name: columnName)
-        dfData.updateMetadataFromDf()
     }
    
 
 }
 #Preview {
     MetadataView()
+        .environment(DfData())
+        .environment(CenterViewState())
 }
 
 

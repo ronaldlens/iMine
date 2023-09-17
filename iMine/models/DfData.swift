@@ -35,29 +35,37 @@ struct StringEntry: Identifiable {
     
     var dataFrame: DataFrame?
     
-    var columnMetadata: [ColumnMetadata] = []
+    var columnMetadata: [ColumnMetadata]
+    
+    var preview: String
     
     init(df: DataFrame? = nil) {
+        self.columnMetadata = []
         self.dataFrame = df
+        self.preview = ""
         updateMetadataFromDf()
     }
     
     func updateMetadataFromDf() {
-        print("updateMetaDataFromDf")
-        columnMetadata = []
+        var newColumnMetadata: [ColumnMetadata] = []
         if let df = self.dataFrame {
             for col in df.columns {
-                columnMetadata.append(ColumnMetadata(col: col))
+                newColumnMetadata.append(ColumnMetadata(col: col))
             }
         }
+        self.columnMetadata = newColumnMetadata
+        self.preview = dataFrame?.description ?? ""
+        
     }
     
     func renameColumn(from: String, to:String) {
         dataFrame?.renameColumn(from, to: to)
+        updateMetadataFromDf()
     }
     
     func dropColumn(name: String) {
         dataFrame?.removeColumn(name)
+        updateMetadataFromDf()
     }
     
     func getListFromColumn(name: String, noLines: Int) -> [StringEntry] {
@@ -81,23 +89,20 @@ struct StringEntry: Identifiable {
         guard var dataFrame = dataFrame else { return }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
-        var newColumn: Column<Date> = dataFrame[name, String.self].map { element in
+        let newColumn: Column<Date> = dataFrame[name, String.self].map { element in
             let str = element!
             return dateFormatter.date(from: str)!
         }
         dataFrame.replaceColumn(name, with: newColumn)
+        self.dataFrame = dataFrame
         updateMetadataFromDf()
-        print(dataFrame)
+    }
+    
+    func dropRowsWithNilInColumn(name: String) {
+        guard var dataFrame = dataFrame else { return }
+        let newDf = dataFrame.filter(on: name, String.self, { $0 != nil })
+        self.dataFrame = DataFrame(newDf)
+        updateMetadataFromDf()
     }
 }
 
-extension EnvironmentValues {
-    var dfData: DfData {
-        get { self[DfDataKey.self] }
-        set { self[DfDataKey.self] = newValue }
-    }
-}
-
-private struct DfDataKey: EnvironmentKey {
-    static var defaultValue: DfData = DfData()
-}

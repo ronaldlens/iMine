@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainWindow: View {
-    @Environment(\.centerViewState) private var centerViewState
+    @Environment(CenterViewState.self) private var centerViewState
     
     var body: some View {
         NavigationView {
@@ -32,5 +32,5 @@ struct MainWindow: View {
 
 #Preview {
     MainWindow()
-        .environment(\.centerViewState, CenterViewState())
+        .environment(CenterViewState())
 }

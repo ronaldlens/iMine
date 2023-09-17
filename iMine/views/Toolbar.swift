@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct Toolbar: CustomizableToolbarContent {
-    @Environment(\.centerViewState) private var centerViewState
-    @Environment(\.dfData) private var dfData
+    @Environment(CenterViewState.self) private var centerViewState
+    @Environment(DfData.self) private var dfData
     
     var body: some CustomizableToolbarContent {
         ToolbarItem(
@@ -50,7 +50,7 @@ struct Toolbar: CustomizableToolbarContent {
         placement: .primaryAction,
         showsByDefault: true) {
             Button {
-                importFile(centerViewState: centerViewState, dfData: dfData)
+                importDataFile(centerViewState: centerViewState, dfData: dfData)
             } label: {
                 Label("Import file", systemImage: "square.and.arrow.down")
             }

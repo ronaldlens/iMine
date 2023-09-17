@@ -8,20 +8,25 @@
 import SwiftUI
 
 struct DfPreview: View {
-    @Environment(\.dfData) private var dfData
+    @Environment(DfData.self) private var dfData
     
     var body: some View {
         VStack {
             Text("Loaded data")
                 .font(.title)
                 .multilineTextAlignment(.center)
-            let table = dfData.dataFrame?.description
+            let table = dfData.preview
             ScrollView(.horizontal) {
-                Text(table!)
+                Text(table)
                     .frame(maxWidth: .infinity)
                     .font(.system(.caption, design: .monospaced))
             }
             .scrollClipDisabled(true)
+            .onAppear {
+                dfData.updateMetadataFromDf()
+                print("onAppear preveiw")
+            }
+            
             
         }
     }

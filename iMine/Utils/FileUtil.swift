@@ -8,7 +8,7 @@
 import SwiftUI
 import TabularData
 
-func importFile(centerViewState: CenterViewState, dfData: DfData) {
+func importDataFile(centerViewState: CenterViewState, dfData: DfData) {
     let openPanel = NSOpenPanel()
     openPanel.allowedContentTypes = [.commaSeparatedText]
     openPanel.allowsMultipleSelection = false

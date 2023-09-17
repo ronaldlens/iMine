@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct DateConvertSheet: View {
-    @Environment(\.centerViewState) private var centerViewState
-    @Environment(\.dfData) private var dfData
+    @Environment(CenterViewState.self) private var centerViewState
+    @Environment(DfData.self) private var dfData
     @Environment(\.dismiss) private var dismiss
     
     
@@ -18,7 +18,7 @@ struct DateConvertSheet: View {
     var body: some View {
         let columnName = centerViewState.selectedColumn
         let datesToConvert = dfData.getListFromColumn(name: columnName, noLines: 100)
-        var convertedDates = tryConvertDates(src: datesToConvert, format: convertString)
+        let convertedDates = tryConvertDates(src: datesToConvert, format: convertString)
         VStack {
             Text("Convert **\(columnName)** to Date")
                 .font(.title2)

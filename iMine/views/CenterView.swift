@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CenterView: View {
-    @Environment(\.centerViewState) private var centerViewState
+    @Environment(CenterViewState.self) private var centerViewState
    
    
     var body: some View {

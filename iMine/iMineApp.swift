@@ -15,8 +15,8 @@ struct iMineApp: App {
     var body: some Scene {
         WindowGroup {
             MainWindow()
-                .environment(\.centerViewState, centerViewState)
-                .environment(\.dfData, dfData)
+                .environment(centerViewState)
+                .environment(dfData)
         }
         .commands {
             Menus()

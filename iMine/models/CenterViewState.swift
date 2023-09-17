@@ -24,13 +24,13 @@ enum WhatView {
     var selectedColumn = ""
 }
 
-extension EnvironmentValues {
-    var centerViewState: CenterViewState {
-        get { self[CenterViewStateKey.self] }
-        set { self[CenterViewStateKey.self] = newValue }
-    }
-}
-        
-        private struct CenterViewStateKey: EnvironmentKey {
-            static var defaultValue: CenterViewState = CenterViewState()
-        }
+//extension EnvironmentValues {
+//    var centerViewState: CenterViewState {
+//        get { self[CenterViewStateKey.self] }
+//        set { self[CenterViewStateKey.self] = newValue }
+//    }
+//}
+//        
+//        private struct CenterViewStateKey: EnvironmentKey {
+//            static var defaultValue: CenterViewState = CenterViewState()
+//        }

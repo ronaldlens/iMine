@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SideBar: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("iMine\n(c)2023 R.F. Lens")
     }
 }
 
