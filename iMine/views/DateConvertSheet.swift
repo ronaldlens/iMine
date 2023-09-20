@@ -66,7 +66,6 @@ struct DateConvertSheet: View {
     }
     
     func tryConvertDates(src: [StringEntry], format: String) -> [StringEntry] {
-        print(format)
         let fromFormat = DateFormatter()
         fromFormat.dateFormat = format
         let toFormat = DateFormatter()

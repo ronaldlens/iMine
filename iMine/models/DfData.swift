@@ -26,6 +26,7 @@ struct ColumnMetadata : Identifiable {
     }
 }
 
+
 struct StringEntry: Identifiable {
     let id = UUID()
     let value: String
@@ -104,5 +105,21 @@ struct StringEntry: Identifiable {
         self.dataFrame = DataFrame(newDf)
         updateMetadataFromDf()
     }
+    
+    func sortDataFrame(onColumn: String) {
+        guard let dataFrame = dataFrame else { return }
+        self.dataFrame = dataFrame.sorted(on: onColumn, order: .ascending)
+    }
+
+    func getMetadata(columnName: String) -> ColumnMetadata? {
+        for metadata in columnMetadata {
+            if metadata.name == columnName {
+                return metadata
+            }
+        }
+        return nil
+    }
+
 }
+
 

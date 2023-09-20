@@ -11,6 +11,8 @@ struct Toolbar: CustomizableToolbarContent {
     @Environment(CenterViewState.self) private var centerViewState
     @Environment(DfData.self) private var dfData
     
+    @State private var isAnalyzing = false
+    
     var body: some CustomizableToolbarContent {
         ToolbarItem(
             id: "toggleSidebar",
@@ -18,11 +20,35 @@ struct Toolbar: CustomizableToolbarContent {
             showsByDefault: true) {
                 Button {
                     toggleSidebar()
+                    print(getProcessSize())
                 } label: {
                     Label("Toggle Sidebar", systemImage: "sidebar.left")
                 }
                 .help("Toggle sidebar")
             }
+        ToolbarItem(
+            id: "importFile",
+            placement: .navigation,
+            showsByDefault: true) {
+                Button {
+                    importDataFile(centerViewState: centerViewState, dfData: dfData)
+                } label: {
+                    Label("Import file", systemImage: "square.and.arrow.down")
+                }
+                .help("Import a CSV file")
+            }
+        ToolbarItem(
+            id: "savedf",
+            placement: .navigation,
+            showsByDefault: true) {
+                Button {
+                    saveDataFile(dfData: dfData)
+                } label: {
+                    Label("Save dataframe", systemImage: "opticaldiscdrive")
+                }
+                .help("Save the current dataframe")
+            }
+        
         ToolbarItem(
             id: "showheader",
             placement: .primaryAction,
@@ -44,18 +70,22 @@ struct Toolbar: CustomizableToolbarContent {
                     Label("Show dataframe table", systemImage: "tablecells.fill.badge.ellipsis")
                 }
                 .help("Show dataframe table")
-        }
-        ToolbarItem(
-        id: "importFile",
-        placement: .primaryAction,
-        showsByDefault: true) {
-            Button {
-                importDataFile(centerViewState: centerViewState, dfData: dfData)
-            } label: {
-                Label("Import file", systemImage: "square.and.arrow.down")
             }
-            .help("Import a CSV file")
-        }
+        ToolbarItem(
+            id:"analyzeprocess",
+            placement: .primaryAction,
+            showsByDefault: true) {
+                Button {
+                    isAnalyzing.toggle()
+                } label: {
+                    Label("Analyze the events", systemImage: "network.badge.shield.half.filled")
+                }
+                .help("STart Event analysis into process")
+                .sheet(isPresented: $isAnalyzing) {
+                    ProcessAnalyzerSheet()
+//                        .frame(width: 640, height: 480)
+                }
+            }
     }
     
     

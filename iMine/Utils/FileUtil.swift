@@ -31,7 +31,20 @@ func importDataFile(centerViewState: CenterViewState, dfData: DfData) {
             return
         }
     }
-    
+}
 
-    
+func saveDataFile(dfData: DfData) {
+    let savePanel = NSSavePanel()
+    savePanel.allowedContentTypes = [.commaSeparatedText]
+
+    let response = savePanel.runModal()
+    if response != .OK {
+        return
+    }
+    guard let saveURL = savePanel.url else { return }
+    do {
+        try dfData.dataFrame?.writeCSV(to: saveURL)
+    } catch {
+        print(error)
+    }
 }

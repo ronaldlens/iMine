@@ -12,15 +12,19 @@ struct CenterView: View {
    
    
     var body: some View {
-        switch centerViewState.whatView {
-        case .nothing:
-            Text("")
-        case .dfPreview:
-           DfPreview()
-        case .metadata:
-            MetadataView()
+        VStack {
+            switch centerViewState.whatView {
+            case .nothing:
+                Text("")
+            case .dfPreview:
+                DfPreview()
+            case .metadata:
+                MetadataView()
+            }
+            Spacer()
+            StatusBar()
+                .frame(alignment: .bottom)
         }
-
     }
 }
 
