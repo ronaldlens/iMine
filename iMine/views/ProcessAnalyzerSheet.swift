@@ -13,6 +13,7 @@ struct ProcessAnalyzerSheet: View {
     
     @State private var correlationSel: String = "None"
     @State private var startTimeSel: String = "None"
+    @State private var endTimeSel: String = "None"
     @State private var activitySel: String = "None"
     @State private var actorSel: String = "None"
     @State var columnList: [String] = []
@@ -33,6 +34,7 @@ struct ProcessAnalyzerSheet: View {
             Section() {
                 ColumnPicker(pickerName: "Correlation", columnList: columnList, selection: $correlationSel)
                 ColumnPicker(pickerName: "Start time", columnList: columnList, selection: $startTimeSel)
+                ColumnPicker(pickerName: "End time", columnList: columnList, selection: $endTimeSel)
                 ColumnPicker(pickerName: "Activity", columnList: columnList, selection: $activitySel)
                 ColumnPicker(pickerName: "Actor", columnList: columnList, selection: $actorSel)
             }
@@ -47,8 +49,10 @@ struct ProcessAnalyzerSheet: View {
                 Text("Cancel")
             }
             Button {
+                okToAnalyze = true
                 let analyzerConfiguration = AnalyzerConfiguration(
                     timeStartColumnName: $startTimeSel.wrappedValue,
+                    timeEndColumnName: $endTimeSel.wrappedValue,
                     correlationColumnName: $correlationSel.wrappedValue,
                     activityColumnName: $activitySel.wrappedValue,
                     actorColumnName: $actorSel.wrappedValue,
@@ -73,9 +77,10 @@ struct ProcessAnalyzerSheet: View {
                     
                 }
                 if okToAnalyze {
+                    dismiss()
                     let analyser = Analyzer(dfData: dfData, configuration: analyzerConfiguration)
                     analyser.iterateDataFrame()
-                    dismiss()
+                    
                 }
             } label: {
                 Text("Apply selection")
@@ -97,6 +102,10 @@ struct ProcessAnalyzerSheet: View {
 
         }
         .padding()
+    }
+    
+    func checkConfiguration() {
+        
     }
 }
 
