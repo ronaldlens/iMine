@@ -8,8 +8,18 @@
 import SwiftUI
 
 struct SideBar: View {
+    
+    @Environment(DfData.self) private var dfData
+    @Environment(ProcessOutline.self) private var processOutline
+    
     var body: some View {
-        Text("iMine\n(c)2023 R.F. Lens")
+        if (processOutline.items.isEmpty) {
+            Text("No processes to analyze")
+        } else {
+            List(processOutline.items, id: \.id, children: \.children) { item in
+                Text(item.name)
+            }.listStyle(.sidebar)
+        }
     }
 }
 

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ProcessAnalyzerSheet: View {
     @Environment(DfData.self) private var dfData
+    @Environment(CenterViewState.self) private var centerViewState
+    @Environment(ProcessOutline.self) private var processOutline
     @Environment(\.dismiss) private var dismiss
     
     @State private var correlationSel: String = "None"
@@ -80,6 +82,9 @@ struct ProcessAnalyzerSheet: View {
                     dismiss()
                     let analyser = Analyzer(dfData: dfData, configuration: analyzerConfiguration)
                     analyser.iterateDataFrame()
+                    let outline = analyser.outline
+                    processOutline.items = outline.items
+                    centerViewState.whatView = .processOutline
                     
                 }
             } label: {
@@ -99,6 +104,7 @@ struct ProcessAnalyzerSheet: View {
                     } message: {
                         Text("Cannot analyze due to\n \(errorMessage) column")
                     }
+            
 
         }
         .padding()

@@ -83,7 +83,7 @@ struct Toolbar: CustomizableToolbarContent {
                 .help("STart Event analysis into process")
                 .sheet(isPresented: $isAnalyzing) {
                     ProcessAnalyzerSheet()
-//                        .frame(width: 640, height: 480)
+
                 }
             }
     }

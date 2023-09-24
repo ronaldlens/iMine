@@ -12,7 +12,8 @@ import SwiftUI
 enum WhatView {
     case nothing,
     dfPreview,
-    metadata
+    metadata,
+    processOutline
     
 }
 

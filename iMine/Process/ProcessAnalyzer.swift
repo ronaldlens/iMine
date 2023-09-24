@@ -66,21 +66,31 @@ class Process {
     }
 }
 
-struct ProcessOutline: Identifiable {
+struct ProcessOutlineItem: Identifiable {
     let id = UUID()
     var name: String
     var image: String
-    var children: [ProcessOutline]?
+    var children: [ProcessOutlineItem]?
 }
 
+@Observable class ProcessOutline {
+    var items: [ProcessOutlineItem]
+    
+    init() {
+        items = []
+    }
+        
+}
 class Analyzer {
     var dfData: DfData
     let configuration: AnalyzerConfiguration
     var processes: [String:Process] = [:]
+    var outline: ProcessOutline
     
     init(dfData: DfData, configuration: AnalyzerConfiguration) {
         self.dfData = dfData
         self.configuration = configuration
+        self.outline = ProcessOutline()
     }
     
     func iterateDataFrame() {
@@ -100,7 +110,7 @@ class Analyzer {
             let name = "\(String(describing: row[configuration.activityColumnName]!))"
             let timeStart = row[configuration.timeStartColumnName] as! Date
             var timeEnd: Date?
-            if configuration.timeEndColumnName != "None" {
+            if configuration.timeEndColumnName == "None" {
                 timeEnd = nil
             } else {
                 timeEnd = (row[configuration.timeEndColumnName] as! Date)
@@ -115,14 +125,21 @@ class Analyzer {
         }
         print("Found \(processes.count) processes")
         
+        outline.items = []
         processes.enumerated().forEach { (idx, process) in
             print("Process \(idx) with \(process.value.count) steps")
-            if idx == 99 {
-                process.value.steps.enumerated().forEach { (idx1, step) in
-                    print("step \(idx1): \(step.name) \(step.timeStart) \(step.duration)")
-                    
-                }
+            
+            var processOutlineItem = ProcessOutlineItem(name: "\(idx)", image: "")
+            processOutlineItem.children = []
+            
+            process.value.steps.enumerated().forEach { (sidx, step) in
+                let stepOutlineItem = ProcessOutlineItem(
+                    name: "step \(sidx) \(step.name)", image: "")
+                processOutlineItem.children?.append(stepOutlineItem)
+                
             }
+            processOutlineItem.name = "\(idx) - \(processOutlineItem.children!.count) steps"
+            outline.items.append(processOutlineItem)
         
         }
     }

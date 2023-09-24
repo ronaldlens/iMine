@@ -20,6 +20,10 @@ struct CenterView: View {
                 DfPreview()
             case .metadata:
                 MetadataView()
+            case .processOutline:
+                ProcessOutlineView()
+                    
+            
             }
             Spacer()
             StatusBar()

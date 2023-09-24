@@ -13,7 +13,7 @@ struct MainWindow: View {
     var body: some View {
         NavigationView {
             SideBar()
-                .frame(width: 200)
+                .frame(minWidth: 200)
             CenterView()
         }
         .frame(
