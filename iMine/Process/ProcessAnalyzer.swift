@@ -17,46 +17,53 @@ struct AnalyzerConfiguration {
     let valueColumnName: String
 }
 
-class ProcessVertex {
-    let from: ProcessStep
-    let to: ProcessStep
-    
-    init(from: ProcessStep, to: ProcessStep) {
-        self.from = from
-        self.to = to
-    }
-}
-
 class ProcessStep {
     let name: String
     var isStart: Bool
     var isend: Bool
     var timeStart: Date
     var timeEnd: Date?
-    var duration: DateInterval
-    var startingVertices: [ProcessVertex]
-    var endingVertices: [ProcessVertex]
+    var duration: TimeInterval
+    var actor: String
     
-    init(name: String, isStart: Bool, timeStart: Date, timeEnd: Date?) {
+    init(name: String, isStart: Bool, timeStart: Date, timeEnd: Date?, actor: String) {
         self.name = name
         self.isStart = isStart
         self.isend =  !isStart
         self.timeStart = timeStart
         self.timeEnd = timeEnd
-        if timeEnd != nil {
-            self.duration = DateInterval(start: timeStart, end: timeEnd!)
-        } else {
-            self.duration = DateInterval()
-        }
-        startingVertices = []
-        endingVertices = []
+        self.duration = TimeInterval()
+        self.actor = actor
     }
+}
+
+struct StepCount: Identifiable {
+    var id = UUID()
+    var name: String
+    var count: Int
+    var countString : String {
+        return "\(count)"
+    }
+}
+
+struct StepDetails: Identifiable {
+    var id = UUID()
+    var name: String
+    var duration: TimeInterval
+    var durationString: String {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .abbreviated
+        formatter.allowedUnits = [.hour, .minute]
+        formatter.zeroFormattingBehavior = .pad
+        return formatter.string(from: duration) ?? ""
+    }
+    var actor: String
+    
 }
 
 class Process {
     let correlation: String
     var steps: [ProcessStep] = []
-    var vertices: [ProcessVertex] = []
     var count: Int {
         return steps.count
     }
@@ -64,13 +71,62 @@ class Process {
     init(correlation: String) {
         self.correlation = correlation
     }
+    
+    func analyzeStepCounts() -> [StepCount] {
+        if count == 0 {
+            return []
+        }
+        
+        var result: [StepCount] = []
+        for step in steps {
+            if let idx = result.firstIndex(where: { $0.name == step.name }) {
+                result[idx].count += 1
+            } else {
+                result.append(StepCount(name: step.name, count: 1))
+            }
+        }
+        result.sort {
+            $0.count > $1.count
+        }
+        return result
+    }
+    
+    func analyzeSteps() -> [StepDetails] {
+        if count == 0 {
+            return []
+        }
+        
+        var result: [StepDetails] = []
+        for step in steps {
+            result.append(StepDetails(name: step.name, duration: step.duration, actor: step.actor))
+        }
+        return result
+    }
 }
 
-struct ProcessOutlineItem: Identifiable {
+enum ProcessOutlineItemType {
+    case process
+    case step
+}
+
+struct ProcessOutlineItem: Identifiable, Equatable {
+    static func == (lhs: ProcessOutlineItem, rhs: ProcessOutlineItem) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     let id = UUID()
     var name: String
     var image: String
     var children: [ProcessOutlineItem]?
+    var process: Process?
+    var processStep: ProcessStep?
+    var type: ProcessOutlineItemType {
+        if process == nil {
+            return .step
+        } else {
+            return .process
+        }
+    }
 }
 
 @Observable class ProcessOutline {
@@ -79,8 +135,26 @@ struct ProcessOutlineItem: Identifiable {
     init() {
         items = []
     }
+    
+    func findItemById(id: UUID) -> ProcessOutlineItem? {
+        for item in items {
+            if item.id == id {
+                return item
+            }
+            if let subItems = item.children {
+                for subItem in subItems {
+                    if subItem.id == id {
+                        return subItem
+                    }
+                }
+            }
+        }
+        return nil
+    }
         
 }
+
+
 class Analyzer {
     var dfData: DfData
     let configuration: AnalyzerConfiguration
@@ -115,8 +189,14 @@ class Analyzer {
             } else {
                 timeEnd = (row[configuration.timeEndColumnName] as! Date)
             }
+            var actor: String = ""
+            if configuration.actorColumnName != "None" {
+                actor = row[configuration.actorColumnName] as! String
+            } else {
+                actor = "N/A"
+            }
             let isStart = processIsNew
-            let step =  ProcessStep(name: name, isStart: isStart, timeStart: timeStart, timeEnd: timeEnd)
+            let step =  ProcessStep(name: name, isStart: isStart, timeStart: timeStart, timeEnd: timeEnd, actor: actor)
             process.steps.append(step)
             
             if (processIsNew) {
@@ -127,15 +207,25 @@ class Analyzer {
         
         outline.items = []
         processes.enumerated().forEach { (idx, process) in
-            print("Process \(idx) with \(process.value.count) steps")
             
             var processOutlineItem = ProcessOutlineItem(name: "\(idx)", image: "")
             processOutlineItem.children = []
+            processOutlineItem.process = process.value
             
             process.value.steps.enumerated().forEach { (sidx, step) in
                 let stepOutlineItem = ProcessOutlineItem(
                     name: "step \(sidx) \(step.name)", image: "")
                 processOutlineItem.children?.append(stepOutlineItem)
+                processOutlineItem.processStep = step
+                
+                if configuration.timeEndColumnName == "None" {
+                    if sidx != process.value.steps.count - 1 {
+                        step.timeEnd = process.value.steps[sidx + 1].timeStart
+                    } else {
+                        step.timeEnd = step.timeStart + 1
+                    }
+                }
+                step.duration = step.timeEnd!.timeIntervalSinceReferenceDate - step.timeStart.timeIntervalSinceReferenceDate
                 
             }
             processOutlineItem.name = "\(idx) - \(processOutlineItem.children!.count) steps"
@@ -144,3 +234,6 @@ class Analyzer {
         }
     }
 }
+
+
+

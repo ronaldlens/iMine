@@ -23,15 +23,5 @@ enum WhatView {
     var id = UUID()
     var whatView: WhatView = .nothing
     var selectedColumn = ""
+    var selectedOutlineItem: ProcessOutlineItem?
 }
-
-//extension EnvironmentValues {
-//    var centerViewState: CenterViewState {
-//        get { self[CenterViewStateKey.self] }
-//        set { self[CenterViewStateKey.self] = newValue }
-//    }
-//}
-//        
-//        private struct CenterViewStateKey: EnvironmentKey {
-//            static var defaultValue: CenterViewState = CenterViewState()
-//        }
