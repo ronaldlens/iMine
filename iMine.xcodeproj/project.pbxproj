@@ -22,10 +22,11 @@
 		6B80B36A2AAF626A005C2899 /* DfPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B80B3692AAF626A005C2899 /* DfPreview.swift */; };
 		6B80B36C2AAFA6E8005C2899 /* DateConvertSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B80B36B2AAFA6E8005C2899 /* DateConvertSheet.swift */; };
 		6B9D08162AC01DEA00E1C986 /* ProcessOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9D08152AC01DEA00E1C986 /* ProcessOutlineView.swift */; };
+		6B9D08182AC3054A00E1C986 /* Process.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9D08172AC3054A00E1C986 /* Process.swift */; };
 		6BC391372AB7992A00B671D8 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 6BC391362AB7992A00B671D8 /* LICENSE */; };
 		6BC3913A2AB85B5700B671D8 /* CpuProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC391392AB85B5700B671D8 /* CpuProcess.swift */; };
 		6BC3913C2AB8B8BA00B671D8 /* StatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC3913B2AB8B8BA00B671D8 /* StatusBar.swift */; };
-		6BC3913F2AB8D90800B671D8 /* ProcessAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC3913E2AB8D90800B671D8 /* ProcessAnalyzer.swift */; };
+		6BC3913F2AB8D90800B671D8 /* EventAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC3913E2AB8D90800B671D8 /* EventAnalyzer.swift */; };
 		6BC391412AB995E500B671D8 /* ProcessAnalyzerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC391402AB995E500B671D8 /* ProcessAnalyzerSheet.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,11 +48,12 @@
 		6B80B3692AAF626A005C2899 /* DfPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DfPreview.swift; sourceTree = "<group>"; };
 		6B80B36B2AAFA6E8005C2899 /* DateConvertSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateConvertSheet.swift; sourceTree = "<group>"; };
 		6B9D08152AC01DEA00E1C986 /* ProcessOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessOutlineView.swift; sourceTree = "<group>"; };
+		6B9D08172AC3054A00E1C986 /* Process.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Process.swift; path = ../../../../Process.swift; sourceTree = "<group>"; };
 		6BC391362AB7992A00B671D8 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		6BC391382AB7995500B671D8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6BC391392AB85B5700B671D8 /* CpuProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuProcess.swift; sourceTree = "<group>"; };
 		6BC3913B2AB8B8BA00B671D8 /* StatusBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBar.swift; sourceTree = "<group>"; };
-		6BC3913E2AB8D90800B671D8 /* ProcessAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessAnalyzer.swift; sourceTree = "<group>"; };
+		6BC3913E2AB8D90800B671D8 /* EventAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAnalyzer.swift; sourceTree = "<group>"; };
 		6BC391402AB995E500B671D8 /* ProcessAnalyzerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessAnalyzerSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,7 +156,8 @@
 		6BC3913D2AB8D8E700B671D8 /* Process */ = {
 			isa = PBXGroup;
 			children = (
-				6BC3913E2AB8D90800B671D8 /* ProcessAnalyzer.swift */,
+				6BC3913E2AB8D90800B671D8 /* EventAnalyzer.swift */,
+				6B9D08172AC3054A00E1C986 /* Process.swift */,
 			);
 			path = Process;
 			sourceTree = "<group>";
@@ -231,10 +234,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B01C3EA2AA0F31E00E193F3 /* MainWindow.swift in Sources */,
-				6BC3913F2AB8D90800B671D8 /* ProcessAnalyzer.swift in Sources */,
+				6BC3913F2AB8D90800B671D8 /* EventAnalyzer.swift in Sources */,
 				6B80B36C2AAFA6E8005C2899 /* DateConvertSheet.swift in Sources */,
 				6BC391412AB995E500B671D8 /* ProcessAnalyzerSheet.swift in Sources */,
 				6B01C4022AA1E9FE00E193F3 /* CenterView.swift in Sources */,
+				6B9D08182AC3054A00E1C986 /* Process.swift in Sources */,
 				6B80B3662AA34A10005C2899 /* DfData.swift in Sources */,
 				6B01C3F72AA104B300E193F3 /* SideBar.swift in Sources */,
 				6B01C3FD2AA1082200E193F3 /* Toolbar.swift in Sources */,

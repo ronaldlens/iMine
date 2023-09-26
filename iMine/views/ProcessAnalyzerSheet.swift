@@ -80,7 +80,7 @@ struct ProcessAnalyzerSheet: View {
                 }
                 if okToAnalyze {
                     dismiss()
-                    let analyser = Analyzer(dfData: dfData, configuration: analyzerConfiguration)
+                    let analyser = EventAnalyzer(dfData: dfData, configuration: analyzerConfiguration)
                     analyser.iterateDataFrame()
                     let outline = analyser.outline
                     processOutline.items = outline.items

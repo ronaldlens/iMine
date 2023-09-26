@@ -19,13 +19,6 @@ struct ProcessOutlineView: View {
                 let stepsCounts: [StepCount] = outlineItem.process!.analyzeStepCounts()
             
                 TabView {
-                    Table(stepsCounts) {
-                        TableColumn("Name", value: \.name)
-                        TableColumn("Count", value: \.countString)
-                    }
-                    .tabItem {
-                        Text("Process steps count")
-                    }
                     let stepDetails = outlineItem.process!.analyzeSteps()
                     
                     Table(stepDetails) {
@@ -39,7 +32,14 @@ struct ProcessOutlineView: View {
                         Text("Process steps")
                         
                     }
-                    
+                   
+                    Table(stepsCounts) {
+                        TableColumn("Name", value: \.name)
+                        TableColumn("Count", value: \.countString)
+                    }
+                    .tabItem {
+                        Text("Process steps count")
+                    }
                 }
             } else {
                 Text("Step \(outlineItem.name)")
