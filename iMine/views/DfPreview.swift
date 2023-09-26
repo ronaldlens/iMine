@@ -24,7 +24,6 @@ struct DfPreview: View {
             .scrollClipDisabled(true)
             .onAppear {
                 dfData.updateMetadataFromDf()
-                print("onAppear preveiw")
             }
             
             

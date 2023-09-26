@@ -20,7 +20,6 @@ struct Toolbar: CustomizableToolbarContent {
             showsByDefault: true) {
                 Button {
                     toggleSidebar()
-                    print(getProcessSize())
                 } label: {
                     Label("Toggle Sidebar", systemImage: "sidebar.left")
                 }
@@ -83,8 +82,20 @@ struct Toolbar: CustomizableToolbarContent {
                 .help("STart Event analysis into process")
                 .sheet(isPresented: $isAnalyzing) {
                     ProcessAnalyzerSheet()
-
+                    
                 }
+            }
+        ToolbarItem(
+            id: "overviewprocess",
+            placement: .primaryAction,
+            showsByDefault: true) {
+                Button {
+                    centerViewState.whatView = .processOutline
+                } label: {
+                    Label("Process outline", systemImage: "chart.xyaxis.line")
+                }
+                .help("Show process outline")
+                
             }
     }
     
