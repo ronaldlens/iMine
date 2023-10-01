@@ -22,7 +22,8 @@ struct CenterView: View {
                 MetadataView()
             case .processOutline:
                 ProcessOutlineView()
-                    
+            case .processdiagram:
+                ProcesDiagramView()
             
             }
             Spacer()

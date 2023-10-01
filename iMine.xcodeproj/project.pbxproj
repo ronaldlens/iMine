@@ -23,6 +23,7 @@
 		6B80B36C2AAFA6E8005C2899 /* DateConvertSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B80B36B2AAFA6E8005C2899 /* DateConvertSheet.swift */; };
 		6B9D08162AC01DEA00E1C986 /* ProcessOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9D08152AC01DEA00E1C986 /* ProcessOutlineView.swift */; };
 		6B9D08182AC3054A00E1C986 /* Process.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9D08172AC3054A00E1C986 /* Process.swift */; };
+		6B9D081A2AC3705900E1C986 /* ProcesDiagramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9D08192AC3705900E1C986 /* ProcesDiagramView.swift */; };
 		6BC391372AB7992A00B671D8 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 6BC391362AB7992A00B671D8 /* LICENSE */; };
 		6BC3913A2AB85B5700B671D8 /* CpuProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC391392AB85B5700B671D8 /* CpuProcess.swift */; };
 		6BC3913C2AB8B8BA00B671D8 /* StatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC3913B2AB8B8BA00B671D8 /* StatusBar.swift */; };
@@ -49,6 +50,7 @@
 		6B80B36B2AAFA6E8005C2899 /* DateConvertSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateConvertSheet.swift; sourceTree = "<group>"; };
 		6B9D08152AC01DEA00E1C986 /* ProcessOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessOutlineView.swift; sourceTree = "<group>"; };
 		6B9D08172AC3054A00E1C986 /* Process.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Process.swift; path = ../../../../Process.swift; sourceTree = "<group>"; };
+		6B9D08192AC3705900E1C986 /* ProcesDiagramView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcesDiagramView.swift; sourceTree = "<group>"; };
 		6BC391362AB7992A00B671D8 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		6BC391382AB7995500B671D8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6BC391392AB85B5700B671D8 /* CpuProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuProcess.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				6BC3913B2AB8B8BA00B671D8 /* StatusBar.swift */,
 				6BC391402AB995E500B671D8 /* ProcessAnalyzerSheet.swift */,
 				6B9D08152AC01DEA00E1C986 /* ProcessOutlineView.swift */,
+				6B9D08192AC3705900E1C986 /* ProcesDiagramView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				6B01C3F72AA104B300E193F3 /* SideBar.swift in Sources */,
 				6B01C3FD2AA1082200E193F3 /* Toolbar.swift in Sources */,
 				6B9D08162AC01DEA00E1C986 /* ProcessOutlineView.swift in Sources */,
+				6B9D081A2AC3705900E1C986 /* ProcesDiagramView.swift in Sources */,
 				6B80B3682AADEDA2005C2899 /* MetadataView.swift in Sources */,
 				6BC3913C2AB8B8BA00B671D8 /* StatusBar.swift in Sources */,
 				6B80B36A2AAF626A005C2899 /* DfPreview.swift in Sources */,

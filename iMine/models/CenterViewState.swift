@@ -13,7 +13,8 @@ enum WhatView {
     case nothing,
     dfPreview,
     metadata,
-    processOutline
+    processOutline,
+    processdiagram
     
 }
 
@@ -24,4 +25,5 @@ enum WhatView {
     var whatView: WhatView = .nothing
     var selectedColumn = ""
     var selectedOutlineItem: ProcessOutlineItem?
+    var processes: [String:Process] = [:]
 }

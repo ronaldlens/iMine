@@ -66,7 +66,6 @@ class EventAnalyzer {
                 processes[correlation] = process
             }
         }
-        print("Found \(processes.count) processes")
         
         outline.items = []
         processes.enumerated().forEach { (idx, process) in

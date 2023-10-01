@@ -26,7 +26,7 @@ struct DfPreview: View {
                 dfData.updateMetadataFromDf()
             }
             
-            
+        
         }
     }
 }

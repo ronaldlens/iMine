@@ -84,6 +84,7 @@ struct ProcessAnalyzerSheet: View {
                     analyser.iterateDataFrame()
                     let outline = analyser.outline
                     processOutline.items = outline.items
+                    centerViewState.processes = analyser.processes
                     centerViewState.whatView = .processOutline
                     
                 }

@@ -97,6 +97,18 @@ struct Toolbar: CustomizableToolbarContent {
                 .help("Show process outline")
                 
             }
+        ToolbarItem(
+            id: "processdiagram",
+            placement: .primaryAction,
+            showsByDefault: true) {
+                Button {
+                    centerViewState.whatView = .processdiagram
+                } label: {
+                    Label("Process outline", systemImage: "arrow.rectangleoath")
+                }
+                .help("Show process diagram")
+                
+            }
     }
     
     
