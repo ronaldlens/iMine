@@ -104,7 +104,7 @@ struct Toolbar: CustomizableToolbarContent {
                 Button {
                     centerViewState.whatView = .processdiagram
                 } label: {
-                    Label("Process outline", systemImage: "arrow.rectangleoath")
+                    Label("Process outline", systemImage: "arrow.up.right.and.arrow.down.left.rectangle")
                 }
                 .help("Show process diagram")
                 

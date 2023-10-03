@@ -26,4 +26,5 @@ enum WhatView {
     var selectedColumn = ""
     var selectedOutlineItem: ProcessOutlineItem?
     var processes: [String:Process] = [:]
+    var processDiagram: ProcessDiagram?
 }
